@@ -4,6 +4,7 @@
 
 # 目录结构
 
+```
 ├── app
 │   ├── config          // 配置文件
 │   ├── controller      // 控制器
@@ -23,6 +24,7 @@
 ├── go.sum
 ├── main.go             // 入口文件
 └── vendor
+```
 
 # 测试
 
