@@ -1,0 +1,4 @@
+[app]
+    name = "gin api demo"
+    port = "9999"
+    mode = "debug" # release or test
