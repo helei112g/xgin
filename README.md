@@ -41,3 +41,13 @@ go test
 cd test/benchmark
 go test -bench=.
 ```
+
+# 记录日志
+
+request 日志
+[request_time] [request_method] [request_uri] [request_proto] [request_ua] [request_referer] [request_post_data] [client_ip]
+
+response 日志
+[response_time] [response_code] [response_msg] [response_data]
+
+cost_time 话费时间

@@ -4,11 +4,8 @@ import (
 	"context"
 	"dayu.com/gindemo/app/config"
 	"dayu.com/gindemo/router"
-	"flag"
 	"fmt"
-	"github.com/fsnotify/fsnotify"
 	"github.com/gin-gonic/gin"
-	"github.com/spf13/viper"
 	"log"
 	"net/http"
 	"os"
@@ -17,38 +14,24 @@ import (
 )
 
 func init() {
-	c := flag.String("c", "./conf/app.toml", "Do not found the config file")
-	flag.Parse()
-
-	// load config
-	viper.AddConfigPath("./conf")
-	viper.SetConfigFile(*c)
-	log.Println("config path is: ", *c)
-	if err := viper.ReadInConfig(); err != nil {
-		panic(fmt.Errorf("Fatal error config file: %s \n", err))
-	}
-
-	viper.WatchConfig()
-	viper.OnConfigChange(func(in fsnotify.Event) {
-		log.Println("loading change config file: ", in.Name)
-	})
+	config.InitConfig()
 }
 
 func main() {
-	gin.SetMode(viper.GetString("app.mode"))
+	gin.SetMode(config.Cfg.GetString("app.mode"))
 
 	e := gin.New()
 	// load router
 	router.SetupRouter(e)
 
 	server := &http.Server{
-		Addr:         fmt.Sprintf(":%s", viper.GetString("app.port")),
+		Addr:         fmt.Sprintf(":%s", config.Cfg.GetString("app.port")),
 		Handler:      e,
 		ReadTimeout:  config.HTTPReadTimeout * time.Second,
 		WriteTimeout: config.HTTPWriteTimeout * time.Second,
 	}
 
-	log.Println("Port: " + viper.GetString("app.port") + "	Pid: " + fmt.Sprintf("%d", os.Getpid()))
+	log.Println("Port: " + config.Cfg.GetString("app.port") + "	Pid: " + fmt.Sprintf("%d", os.Getpid()))
 
 	// listen server
 	go func() {
