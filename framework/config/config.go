@@ -1,7 +1,7 @@
 package config
 
 import (
-	"dayu.com/gindemo/pkg/util"
+	"dayu.com/gindemo/framework/util"
 	"flag"
 	"fmt"
 	"github.com/fsnotify/fsnotify"

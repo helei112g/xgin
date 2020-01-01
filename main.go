@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-	"dayu.com/gindemo/app/config"
+	"dayu.com/gindemo/framework/config"
 	"dayu.com/gindemo/router"
 	"fmt"
 	"github.com/gin-gonic/gin"
@@ -13,22 +13,22 @@ import (
 	"time"
 )
 
-func init() {
-	config.InitConfig()
-}
-
 func main() {
-	gin.SetMode(config.Cfg.GetString("app.mode"))
-
 	e := gin.New()
+
+	// middleware
+	e.Use(gin.Logger())
+	e.Use(gin.Recovery())
+
+	gin.SetMode(config.RunMode)
 	// load router
 	router.SetupRouter(e)
 
 	server := &http.Server{
-		Addr:         fmt.Sprintf(":%s", config.Cfg.GetString("app.port")),
+		Addr:         fmt.Sprintf(":%d", config.HTTPPort),
 		Handler:      e,
-		ReadTimeout:  config.HTTPReadTimeout * time.Second,
-		WriteTimeout: config.HTTPWriteTimeout * time.Second,
+		ReadTimeout:  config.ReadTimeout,
+		WriteTimeout: config.WriteTimeout,
 	}
 
 	log.Println("Port: " + config.Cfg.GetString("app.port") + "	Pid: " + fmt.Sprintf("%d", os.Getpid()))

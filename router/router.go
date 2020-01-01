@@ -1,10 +1,11 @@
 package router
 
 import (
-	"dayu.com/gindemo/app/controller/site"
+	v1 "dayu.com/gindemo/api/v1"
 	"github.com/gin-gonic/gin"
 )
 
 func SetupRouter(e *gin.Engine) {
-	e.GET("/ping", site.Ping)
+	apiv1 := e.Group("/api/v1")
+	apiv1.GET("/ping", v1.Ping)
 }
