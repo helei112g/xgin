@@ -5,24 +5,29 @@
 # 目录结构
 
 ```
-├── app
-│   ├── config          // 配置文件
-│   ├── controller      // 控制器
-│   ├── middleware      // 中间件
-│   └── model           // model
-├── conf
-│   └── app.toml        // 配置文件
-├── router
-│   └── router.go       // 路由
-├── test
-│   ├── api             // 功能测试
-│   └── benchmark       // 压力测试
-├── utils               // 工具包
-├── LICENSE             // 开源协议
+├── LICENSE         // 开源协议
 ├── README.md
-├── go.mod              // mod 包管理
+├── api             // 对外开放的api包
+│   └── v1          // 版本控制
+├── conf            // 配置文件
+│   └── app.toml
+├── framework       // 一些框架用到的包
+│   ├── config      // 配置文件
+│   ├── e           // 错误码管理
+│   ├── store       // 数据库 or cache初始化
+│   └── util        // 工具类
+├── go.mod
 ├── go.sum
-├── main.go             // 入口文件
+├── main.go         // 入口文件
+├── middleware      // 中间件
+├── model           // 对应底层model
+├── router          // 路由
+│   └── router.go
+├── runtime         // 运行时存储数据
+│   └── logs
+├── test            // 测试
+│   ├── api         // http 形式的api测试
+│   └── benchmark   // 压力测试
 └── vendor
 ```
 
