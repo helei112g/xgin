@@ -1,0 +1,30 @@
+[app]
+    name = "gin api demo"
+    mode = "debug" # release or test or debug
+[server]
+    port = 9999
+    read_timeout = 120
+    write_timeout = 120
+[log]
+    path = "runtime/logs/app.log"
+    level = "debug"
+[database]
+    [database.default]
+            [database.default.w]
+                user = "root"
+                pwd = "123123"
+                host = "127.0.0.1"
+                port = 3307
+                dbNmae = "blog"
+            [database.default.r]
+                user = "root"
+                pwd = "123123"
+                host = "127.0.0.1"
+                port = 3307
+                dbNmae = "blog"
+[cache]
+    [cache.redis]
+        type = "redis"
+        host = "127.0.0.1"
+        port = 6379
+        auth = "123123"
